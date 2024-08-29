@@ -1,20 +1,25 @@
 package org.calculator.src;
 
-public class Calculadora {
+import java.util.ArrayList;
 
-    public Calculadora() {
+public class Calculadora extends Operacion {
+    // La clase calculadora depende de lo que haga HistorialOperaciones para funcionar
+    // Por lo que esto sera lo que simulemos con Mockito
+    HistorialOperaciones historialOperaciones;
+
+    public Calculadora(HistorialOperaciones historialOperaciones) {
+        this.historialOperaciones = historialOperaciones;
     }
 
-    public Double operar(Double num1, Double num2, Character op) {
-        Operacion operacion = op == '+' ? new Suma() :
-                op == '-' ? new Resta() :
-                        op == '*' ? new Multiplicacion() :
-                                op == '/' ? new Division() : null;
+    public void calcular(Double numero1, Double numero2, Character operacion) {
+        Double resultado = operacion == '+' ? suma(numero1, numero2) :
+                operacion == '-' ? resta(numero1, numero2) :
+                        operacion == '*' ? multiplicacion(numero1, numero2) :
+                                operacion == '/' ? division(numero1, numero2) : null;
 
-        if (operacion == null) {
+        if (resultado == null)
             throw new UnsupportedOperationException("Operador no soportado");
-        }
-        Double resultado = operacion.operacion(num1, num2);
-        return resultado;
+
+        historialOperaciones.agregarResultado(resultado);
     }
 }
