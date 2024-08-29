@@ -1,8 +1,8 @@
 package org.calculator.src;
 
-public class Multiplicacion implements Operacion {
+public class Multiplicacion extends Operacion {
     @Override
-    public Double operacion(Double num1, Double num2) {
-        return num1 * num2;
+    public Double operacion(Double a, Double b) {
+        return a * b;
     }
 }

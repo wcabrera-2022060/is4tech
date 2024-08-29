@@ -1,5 +1,7 @@
 package org.calculator.src;
 
-public interface Operacion {
-    public Double operacion(Double num1, Double num2);
+import java.util.ArrayList;
+
+public abstract class Operacion {
+    public abstract Double operacion(Double a, Double b);
 }
